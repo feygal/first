@@ -1,0 +1,893 @@
+Transcript name: What is Hadoop?
+English
+Hello everyone and welcome! My name is Akmal Chaudhri.
+In this video we will explain what Hadoop and Big Data are.
+Imagine this scenario: You have 1GB of data that you need to process.
+The data are stored in a relational database in your desktop computer and this desktop computer
+has no problem handling this load.
+Then your company starts growing very quickly, and that data grows to 10GB.
+And then 100GB.
+And you start to reach the limits of your current desktop computer.
+So you scale-up by investing in a larger computer, and you are then OK for a few more months.
+When your data grows to 10TB, and then 100TB.
+And you are fast approaching the limits of that computer.
+Moreover, you are now asked to feed your application with unstructured data coming from sources
+like Facebook, Twitter, RFID readers, sensors, and so on.
+Your management wants to derive information from both the relational data and the unstructured
+data, and wants this information as soon as possible.
+What should you do? Hadoop may be the answer!
+Hadoop is an open source project of the Apache Foundation.
+It is a framework written in Java originally developed by Doug Cutting who named it after his
+son's toy elephant.
+Hadoop uses Google’s MapReduce and Google File System technologies as its foundation.
+It is optimized to handle massive quantities of data which could be structured, unstructured or
+semi-structured, using commodity hardware, that is, relatively inexpensive computers.
+This massive parallel processing is done with great performance. However, it is a batch operation
+handling massive quantities of data, so the response time is not immediate.
+As of Hadoop version 0.20.2, updates are not possible, but appends will be possible starting in
+version 0.21.
+Hadoop replicates its data across different computers, so that if one goes down, the data are
+processed on one of the replicated computers.
+Hadoop is not suitable for OnLine Transaction Processing workloads where data are randomly
+accessed on structured data like a relational database.
+Hadoop is not suitable for OnLine Analytical Processing or Decision Support System workloads
+where data are sequentially accessed on structured data like a relational database, to generate
+reports that provide business intelligence.
+Hadoop is used for Big Data. It complements OnLine Transaction Processing and OnLine
+Analytical Processing.
+It is NOT a replacement for a relational database system.
+So, what is Big Data?
+With all the devices available today to collect data, such as RFID readers, microphones, cameras,
+sensors, and so on, we are seeing an explosion in data being collected worldwide.
+Big Data is a term used to describe large collections of data (also known as datasets) that may be
+unstructured, and grow so large and quickly that it is difficult to manage with regular database or
+statistics tools.
+Other interesting statistics providing examples of this data explosion are:
+There are more than 2 billion internet users in the world today,
+and 4.6 billion mobile phones in 2011,
+and 7TB of data are processed by Twitter every day,
+and 10TB of data are processed by Facebook every day.
+Interestingly, approximately 80% of these data are unstructured.
+With this massive quantity of data, businesses need fast, reliable, deeper data insight.
+Therefore, Big Data solutions based on Hadoop and other analytics software are becoming more
+and more relevant.
+This is a list of other open source projects related to Hadoop:
+Eclipse is a popular IDE donated by IBM to the open source community.
+Lucene is a text search engine library written in Java.
+Hbase is the Hadoop database.
+Hive provides data warehousing tools to extract, transform and load data, and query this data
+stored in Hadoop files.
+Pig is a platform for analyzing large data sets. It is a high level language for expressing data
+analysis.
+Jaql, or jackal, is a query language for JavaScript open notation.
+Zoo Keeper is a centralized configuration service and naming registry for large distributed
+systems.
+Avro is a data serialization system.
+UIMA is the architecture for the development, discovery, composition and deployment for the
+analysis of unstructured data.
+Let’s now talk about examples of Hadoop in action.
+Early in 2011, Watson, a super computer developed by IBM competed in the popular Question and
+Answer show “Jeopardy!”.
+Watson was successful in beating the two most popular players in that game.
+It was input approximately 200 million pages of text using Hadoop to distribute the workload for
+loading this information into memory.
+Once the information was loaded, Watson used other technologies for advanced search and
+analysis.
+In the telecommunications industry we have China Mobile, a company that built a Hadoop cluster
+to perform data mining on Call Data Records.
+China Mobile was producing 5-8TB of these records daily. By using a Hadoop-based system they
+were able to process 10 times as much data as when using their old system,
+and at one fifth of the cost.
+In the media we have the New York Times which wanted to host on their website all public
+domain articles from 1851 to 1922.
+They converted articles from 11 million image files to 1.5TB of PDF documents. This was
+implemented by one employee who ran a job in 24 hours on a 100-instance Amazon EC2 Hadoop
+cluster
+at a very low cost.
+In the technology field we again have IBM with IBM ES2, an enterprise search technology based
+on Hadoop, Lucene and Jaql.
+ES2 is designed to address unique challenges of enterprise search such as the use of an enterprise-
+specific vocabulary, abbreviations and acronyms.
+ES2 can perform mining tasks to build acronym libraries, regular expression patterns, and geo-
+classification rules.
+There are also many internet or social network companies using Hadoop such as Yahoo,
+Facebook, Amazon, eBay, Twitter, StumbleUpon, Rackspace, Ning, AOL, and so on.
+Yahoo is, of course, the largest production user with an application running a Hadoop cluster
+consisting of approximately 10,000 Linux machines.
+Yahoo is also the largest contributor to the Hadoop open source project.
+Now, Hadoop is not a magic bullet that solves all kinds of problems.
+Hadoop is not good to process transactions because it is random access.
+It is not good when the work cannot be parallelized.
+It is not good for low latency data access.
+Not good for processing lots of small files.
+And not good for intensive calculations with little data.
+Now let’s move on, and talk about Big Data solutions.
+Big Data solutions are more than just Hadoop. They can integrate analytic solutions to the mix to
+derive valuable information that can combine structured legacy data with new unstructured data.
+Big data solutions may also be used to derive information from data in motion.
+For example, IBM has a product called InfoSphere Streams that can be used to quickly determine
+customer sentiment for a new product based on Facebook or Twitter comments.
+Finally, let’s end this presentation with one final thought: Cloud computing has gained a
+tremendous track in the past few years, and it is a perfect fit for Big Data solutions.
+Using the cloud, a Hadoop cluster can be setup in minutes, on demand, and it can run for as long
+as is needed without having to pay for more than what is used.
+This is the end of this video. Thank you for watching. To learn more, visit BigDataUniversity.com.
+Transcript name: What is Hadoop?
+English
+Welcome to the unit of Hadoop Fundamentals on Hadoop architecture.
+I will begin with a terminology review. Then I will cover the two major components
+of Hadoop, the distributed file system component and the MapReduce component,
+with an emphasis on a distributed filesystem called Hadoop Distributed File System
+or HDFS. We will see what types of nodes can exist in a Hadoop cluster and I will
+explain an important feature of Hadoop called "rack awareness" or "network
+topology awareness". I will end with an example of how a file is written to HDFS to
+illustrate replication.
+Before we examine Hadoop components and architecture, let’s review some of the
+terms that are used in this discussion.
+A node is simply a computer, typically non-enterprise, commodity hardware for
+nodes that contain data. So in this example, we have Node 1.
+Then we can add more nodes, such as Node 2,
+Node 3, and so on.
+This would be called a rack. A rack is a collection of 30 or 40 nodes that are
+physically stored close together and are all connected to the same network switch.
+Network bandwidth between any two nodes in rack is greater than bandwidth
+between two nodes on different racks.
+You will see later how Hadoop takes advantage of this fact.
+A Hadoop Cluster (or just ‘cluster’ from now on) is a collection of racks
+Let us now examine Hadoop's architecture.
+Hadoop has two major components:
+- the distributed filesystem component, the main example of which is the Hadoop
+Distributed File System, though other file systems are supported.
+- the MapReduce component, which is a framework for performing calculations on
+the data in the distributed file system. This unit will cover the Hadoop Distributed
+File System and MapReduce will be covered separately.
+we will now examine the most important distributed file system in Hadoop - HDFS
+HDFS runs on top of the existing file systems on each node in a Hadoop cluster
+Hadoop works best with very large files. The larger the file, the less time Hadoop
+spends seeking for the next data location on disk and the more time Hadoop runs at
+the limit of the bandwidth of your disks. Seeks are generally expensive operations
+that are useful when you only need to analyze a small subset of your dataset. Since
+Hadoop is designed to run over your entire dataset, it is best to minimize seeks by
+using large files. Hadoop is designed for streaming or sequential data access rather
+than random access. Sequential data access means fewer seeks, since Hadoop only
+seeks to the beginning of each block and begins reading sequentially from there.
+Hadoop uses blocks to store a file or parts of a file.
+This is shown in the figure.
+Let us now examine file blocks in more detail.
+First of all, blocks are large. They default to 64 megabytes each and most systems
+run with block sizes of 128 megabytes or larger.
+A Hadoop block is a file on the underlying filesystem. Since the underlying
+filesystem stores files as blocks, one Hadoop block may consist of many blocks in
+the underlying file system as shown in the figure.
+Blocks have several advantages:
+First, they are fixed in size. This makes it easy to calculate how many can fit on a
+disk.
+Second, by being made up of blocks that can be spread over multiple nodes, a file
+can be larger than any single disk in the cluster.
+HDFS blocks also don't waste space. If a file is not an even multiple of the block
+size, the block containing the remainder does not occupy the space of an entire
+block.
+As shown in the figure, a 420 megabyte file with a 128 megabyte block size
+consumes four blocks, but the fourth block does not consume a full 128 megabytes.
+Finally, blocks fit well with replication, which allows HDFS to be fault tolerant and
+available on commodity hardware.
+As shown in the figure:
+Each block is replicated to multiple nodes. For example, block 1 is stored on node 1
+and node 2.
+This allows for node failure without data loss. If node 1 crashes, node 2 still runs
+and has block 1's data. In this example, we are only replicating data across two
+nodes, but you can set replication to be across many more nodes by changing
+Hadoop's configuration or even setting the replication factor for each individual file.
+The second major component of Hadoop, described in detail in another lecture, is
+the MapReduce component.
+HDFS was based on a paper Google published about their Google File System,
+Hadoop's MapReduce is inspired by a paper Google published on the MapReduce
+technology.
+A MapReduce program consists of two types of transformations that can be applied
+to data any number of times - a map transformation and a reduce transformation.
+A MapReduce job is an executing MapReduce program that is divided into map
+tasks that run in parallel with each other and reduce tasks that run in parallel with
+each other.
+Let us examine the main types of nodes in Hadoop. They are classified as HDFS or
+MapReduce nodes. For HDFS nodes we have the NameNode, and the DataNodes.
+For MapReduce nodes we have the JobTracker and the TaskTracker nodes. Each of
+these is discussed in more detail later in this presentation. There are other HDFS
+nodes such as the Secondary NameNode, Checkpoint node, and Backup node that
+are not discussed in this course.
+This diagram shows some of the communication paths between the different types of
+nodes on the system. A client is shown as communicating with a JobTracker. It can
+also communicate with the NameNode and with any DataNode.
+There is only one NameNode in the cluster. While the data that makes up a file is
+stored in blocks at the data nodes, the metadata for a file is stored at the NameNode.
+The NameNode is also responsible for the filesystem namespace. To compensate for
+the fact that there is only one NameNode, one should configure the NameNode to
+write a copy of its state information to multiple locations, such as a local disk and an
+NFS mount. If there is one node in the cluster to spend money on the best enterprise
+hardware for maximum reliability it is the NameNode. The NameNode should also
+have as much RAM as possible because it keeps the entire filesystem metadata in
+memory.
+An typical HDFS cluster has many DataNodes. They store the blocks of data and
+when a client requests a file, it finds out from the NameNode which DataNodes store
+the blocks that make up that file and the client directly reads the blocks from the
+individual DataNodes. Each DataNode also reports to the NameNode periodically
+with the list of blocks it stores. DataNodes do not require expensive enterprise
+hardware or replication at the hardware layer. The DataNodes are designed to run on
+commodity hardware and replication is provided at the software layer.
+A JobTracker node manages MapReduce jobs. There is only one of these on the
+cluster. It receives jobs submitted by clients. It schedules the Map tasks and Reduce
+tasks on the appropriate TaskTrackers in a rack-aware manner and monitors for any
+failing tasks that need to be rescheduled on a different TaskTracker.
+To achieve the parallelism for your map and reduce tasks, there are many
+TaskTrackers in a Hadoop cluster. Each TaskTracker spawns Java Virtual Machines
+to run your map or reduce task.
+This lesson continues in the next video.
+Transcript name: Hadoop architecture – Topology/rack awareness
+English
+Hadoop has awareness of the topology of the network. This allows it to optimize
+where it sends the computations to be applied to the data. Placing the work as close
+as possible to the data it operates on maximizes the bandwidth available for reading
+the data. In the diagram, the data we wish to apply processing to is block B1, the
+light blue rectangle on node n1 on rack 1.
+When deciding which TaskTracker should receive a MapTask that reads data from
+B1, the best option is to choose the TaskTracker that runs on the same node as the
+data.
+If we can't place the computation on the same node, our next best option is to place
+it on a node in the same rack as the data.
+The worst case that Hadoop currently supports is when the computation must be
+done from a node in a different rack than the data. When rack-awareness is
+configured for your cluster, Hadoop will always try to run the task on the
+TaskTracker node with the highest bandwidth access to the data.
+Let us walk through an example of how a file gets written to HDFS.
+First, the client submits a "create" request to the NameNode. The NameNode checks
+that the file does not already exist and the client has permission to write the file.
+If that succeeds, the NameNode determines the DataNode to write the first block to.
+If the client is running on a DataNode, it will try to place it there. Otherwise, it
+chooses at random.
+By default, data is replicated to two other places in the cluster. A pipeline is built
+between the three DataNodes that make up the pipeline. The second DataNode is a
+randomly chosen node on a rack other than that of the first replica of the block. This
+is to increase redundancy.
+The final replica is placed on a random node within the same rack as the second
+replica. The data is piped from the second DataNode to the third.
+To ensure the write was successful before continuing, acknowledgment packets are
+sent back from the third DataNode to the second,
+From the second DataNode to the first
+And from the first DataNode to the client
+This process occurs for each of the blocks that make up the file, in this case, the
+second
+and the third block. Notice that, for every block, there is a replica on at least two
+racks.
+When the client is done writing to the DataNode pipeline and has received
+acknowledgements, it tells the NameNode that it is complete. The NameNode will
+check that the blocks are at least minimally replicated before responding.
+This concludes this presentation. Thank you for watching.
+Transcript name: HDFS command line interface
+English
+Welcome to the unit of Hadoop Fundamentals on the HDFS command line interface.
+In this presentation, I will cover the general usage of the HDFS command line
+interface and commands specific to HDFS. Other commands should be familiar to
+anyone with UNIX experience and will not be covered. I will follow the presentation
+of most commands with an example run on an IBM BigInsights installation of the
+Hadoop technology stack.
+The HDFS can be manipulated through a Java API or through a command line
+interface. All commands for manipulating HDFS through Hadoop's command line
+interface begin with "hadoop", a space, and "fs". This is the file system shell. This is
+followed by the command name as an argument to "hadoop fs". These commands
+start with a dash. For example, the "ls" command for listing a directory is a common
+UNIX command and is preceded with a dash. As on UNIX systems, ls can take a
+path as an argument. In this example, the path is the current directory, represented
+by a single dot.
+Let's begin looking at these HDFS commands by starting up Hadoop. We'll run the
+start.sh script to bring up each of the Hadoop nodes: first the NameNode, the
+Secondary NameNode, a DataNode, the JobTracker, and a TaskTracker. Now we'll
+run the -ls command to give us the current directory.
+As we saw for the "ls" command, the file system shell commands can take paths as
+arguments. These paths can be expressed in the form of uniform resource identifiers
+or URIs. The URI format consists of a scheme, an authority, and path. There are
+multiple schemes supported. The local file system has a scheme of "file". HDFS has
+a scheme called "hdfs". For example, let us say you wish to copy a file called
+"myfile.txt" from your local filesystem to an HDFS file system on the localhost. You
+can do this by issuing the command shown. The copyFromLocal command takes a
+URI for the source and a URI for the destination. The scheme and the authority do
+not always need to be specified. Instead you may rely on their default values. These
+defaults can be overridden by specifying them in a file named core-site.xml in the
+conf directory of your Hadoop installation.
+Now let's examine the copyFromLocal command. We will copy a file named
+myfile.txt to the HDFS. Now we can just examine the HDFS with the -ls command
+and see that our file has been copied. And there it is.
+HDFS supports many POSIX-like commands. HDFS is not a fully POSIX compliant
+file system, but it supports many of the commands. The HDFS commands are
+mostly easily-recognized UNIX commands like cat and chmod. There are also a few
+commands that are specific to HDFS such as copyFromLocal. We'll examine a few
+of these.
+copyFromLocal and put are two HDFS-specific commands that do the same thing -
+copy files from the local filesystem to a location on another filesystem.
+Their opposite is the copyToLocal command which can also be referred to as get.
+This command copies files out of the filesystem you specify and into the local
+filesystem.
+getmerge is an enhanced form of get that can merge the files from multiple locations
+into a single local file.
+Now let's try out the getmerge command. First we will copy the myfile.txt into a
+second copy on the HDFS called myfile2.txt. Then we will use the getmerge
+command to combine the two and write them as one file in the local filesystem
+called myfiles.txt. Now if we cat out the value, we see the text twice.
+setrep lets you override the default level of replication to a level you specify. You
+can do this for one file or, with the -R option, to an entire tree. This command
+returns immediately after requesting the new replication level. If you want the
+command to block until the job is done, pass the -w option.
+This concludes the presentation. Thank you for watching.
+Transcript name: MapReduce – Part 1
+English
+Welcome to the unit of Hadoop Fundamentals on MapReduce.
+In this unit, I will first explain what map and reduce operations are, then take you
+through what happens when you submit a MapReduce job to Hadoop. We will look
+at "the shuffle" that connects the output of each mapper to the input of a reducer.
+This will take us into the fundamental datatypes used by Hadoop and see an example
+data flow. Finally, we will examine Hadoop MapReduce fault tolerance, scheduling,
+and task execution optimizations.
+To understand MapReduce, we need to break it into its component operations map
+and reduce. Both of these operations come from functional programming languages.
+These are languages that let you pass functions as arguments to other functions.
+We'll start with an example using a traditional for loop. Say we want to double every
+element in an array. We would write code like that shown.
+The variable "a" enters the for loop as [1,2,3] and comes out as [2,4,6]. Each array
+element is mapped to a new value that is double the old value.
+The body of the for loop, which does the doubling, can be written as a function.
+We now say a[i] is the result of applying the function fn to a[i]. We define fn as a
+function that returns its argument multiplied by 2.
+This will allow us to generalize this code. Instead of only being able to use this code
+to double numbers, we could use it for any kind of map operation.
+We will call this function "map" and pass the function fn as an argument to map.
+We now have a general function named map and can pass our "multiply by 2"
+function as an argument.
+Writing the function definition in one statement is a common idiom in functional
+programming languages.
+In summary, we can rewrite a for loop as a map operation taking a function as an
+argument. Other than saving two lines of code, why is it useful to rewrite our code
+this way? Let's say that instead of looping over an array of three elements, we want
+to process a dataset with billions of elements and take advantage of a thousand
+computers running in parallel to quickly process those billions of elements. If we
+decided to add this parallelism to the original program, we would need to rewrite the
+whole program. But if we wanted to parallelize the program written as a call to map,
+we wouldn't need to change our program at all. We would just use a parallel
+implementation of map.
+Reduce is similar. Say you want to sum all the elements of an array. You could write
+a for loop that iterates over the array and adds each element to a single variable
+named sum. But we can we generalize this.
+The body of the for loop takes the current sum and the current element of the array
+and adds them to produce a new sum. Let's replace this with a function that does the
+same thing.
+We can replace the body of the for loop with an assignment of the output of a
+function fn to s. The fn function
+takes the sum s and the current array element
+a[i] as its arguments. The implementation of fn is a function that returns the sum of
+its two arguments.
+We can now rewrite the sum function so that the function fn is passed in as an
+argument.
+This generalizes our sum function into a reduce function. We will also let the initial
+value for the sum variable be passed in as an argument.
+We can now call the function reduce whenever we need to combine the values of an
+array in some way, whether it is a sum, or a concatenation, or some other type of
+operation we wish to apply. Again, the advantage is that, should we wish to handle
+large amounts of data and parallelize this code, we do not need to change our
+program, we simply replace the implementation of the reduce function with a more
+sophisticated implementation. This is what Hadoop MapReduce is. It is a
+implementation of map and reduce that is parallel, distributed, fault-tolerant and
+network topology-aware. This lets you efficiently run map and reduce operations
+over large amounts of data.
+This lesson is continued in the next video.
+Transcript name: MapReduce – Part 2 – Submitting a job
+English
+The process of running a MapReduce job on Hadoop consists of 8 major steps. The
+first step is the MapReduce program you've written tells the JobClient to run a
+MapReduce job.
+This sends a message to the JobTracker which produces a unique ID for the job.
+The JobClient copies job resources, such as a jar file containing a Java code you
+have written to implement the map or the reduce task, to the shared file system,
+usually HDFS.
+Once the resources are in HDFS, the JobClient can tell the JobTracker to start the
+job.
+The JobTracker does its own initialization for the job. It calculates how to split
+the data so that it can send each "split" to a different mapper process to maximize
+throughput. It retrieves these "input splits" from the distributed file system.
+The TaskTrackers are continually sending heartbeat messages to the JobTracker.
+Now that the JobTracker has work for them, it will return a map task or a reduce
+task as a response to the heartbeat.
+The TaskTrackers need to obtain the code to execute, so they get it from the shared
+file system.
+Then they can launch a Java Virtual Machine with a child process running in it and
+this child process runs your map code or your reduce code.
+This lesson is continued in the next video.
+Transcript name: MapReduce – Part 3 – Mergesort/Shuffle
+English
+Let us examine how the map and reduce operations work in sequence on your data
+to produce the final output. In this case, we have a job with a single map step and a
+single reduce step. The first step is the map step. It takes a subset of the full data set
+called an input split and applies to each row in the input split an operation you have
+written, such as the "multiply the value by two" operation we used in our earlier map
+example.
+There may be multiple map operations running in parallel with each other, each one
+processing a different input split.
+The output data is buffered in memory and spills to disk. It is sorted and partitioned
+by key using the default partitioner. A merge sort sorts each partition.
+The partitions are shuffled amongst the reducers. For example, partition 1 goes to
+reducer 1. The second map task also sends its partition 1 to reducer 1. Partition 2
+goes to the other reducer.
+Each reducer does its own merge steps and executes the code of your reduce task.
+For example, it could do a sum like we used in the earlier reduce example.
+This produces sorted output at each reducer.
+This lesson is continued in the next video.
+Transcript name: MapReduce – Part 4 – Fundamental data types
+English
+The data that flows into and out of the mappers and reducers takes a specific form.
+Data enters Hadoop in unstructured form but before it gets to the first mapper,
+Hadoop has changed it into key-value pairs with Hadoop supplying its own key.
+The mapper produces a list of key value pairs. Both the key and the value may
+change from the k1 and v1 that came in to a k2 and v2. There can now be duplicate
+keys coming out of the mappers. The shuffle step will take care of grouping them
+together.
+The output of the shuffle is the input to the reducer step. Now, we still have a list of
+the v2's that come out of the mapper step, but they are grouped by their keys and
+there is no longer more than one record with the same key.
+Finally, coming out of the reducer is, potentially, an entirely new key and value, k3
+and v3. For example, if your reducer summed the values associated with each k2,
+your k3 would be equal to k2 and your v3 would be the sum of the list of v2s.
+Let us look at an example of a simple data flow. Say we want to transform the input
+on the left to the output on the right. On the left, we just have letters. On the right,
+we have counts of the number of occurrences of each letter
+in the input.
+Hadoop does the first step for us. It turns the input data into key-value pairs and
+supplies its own key: an increasing sequence number.
+The function we write for the mapper needs to take these key-value pairs and
+produce something that the reduce step can use to count occurrences. The simplest
+solution is make each letter a key and make every value a 1.
+The shuffle groups records having the same key together, so we see B now has two
+values, both 1, associated with it.
+The reduce is simple: it just sums the values it is given to produce a sum for each
+key.
+This lesson is continued in the next video.
+Transcript name: MapReduce – Part 5 – Fault Tolerance
+English
+Now that you know what a successful MapReduce job looks like, let us see what
+happens when something goes wrong.
+The first kind of failure is a failure of the task, which could be due to a bug in the
+code of your map task or reduce task.
+The JVM tells the TaskTracker and Hadoop counts this as a failed attempt and can
+start up a new task.
+What if it hangs rather than fails? That is detected too and the JobTracker can run
+your task again on a different machine in case it was a hardware problem.
+If it continues to fail on each new attempt, Hadoop will fail the job altogether.
+The next kind of failure is a failure of the TaskTracker itself.
+The JobTracker will know because it is expecting a heartbeat.
+If it doesn't get a heartbeat, it removes that TaskTracker from the TaskTracker pool.
+Finally, what if the JobTracker fails?
+There is only one JobTracker. If it fails, your job is failed.
+This lesson is continued in the next video.
+Transcript name: MapReduce – Part 6 – Scheduling & Task Execution
+English
+So far we have looked at how Hadoop executes a single job as if it is the only job on
+the system. But it would be unfortunate if all of your valuable data could only be
+queried by one user at a time. Hadoop schedules jobs using one of three schedulers.
+The simplest is the default FIFO scheduler.
+It lets users submit jobs while other jobs are running, but queues these jobs so that
+only one of them is running at a time.
+The fair scheduler is more sophisticated.
+It lets multiple users compete over cluster resources and tries to give every user an
+equal share. It also supports guaranteed minimum capacities.
+The capacity scheduler takes a different approach.
+From each user's perspective, it appears that the they have the cluster to themselves
+with FIFO scheduling, but users are actually sharing the resources.
+Hadoop offers some configuration options for speeding up the execution of your
+map and reduce tasks under certain conditions.
+One such option is speculative execution.
+When a task takes a long time to run, Hadoop detects this and launches a second
+copy of your task on a different node. Because the tasks are designed to be self-
+contained and independent, starting a second copy does not affect the final answer.
+Whichever copy of the task finishes first has its output go to the next phase. The
+other task's redundant output is discarded.
+Another option for improving performance is to reuse the Java Virtual Machine.
+The default is to put each task in its own JVM for isolation purposes, but starting up
+a JVM can be relatively expensive when jobs are short, so you have the option to
+reuse the same JVM from one task to the next.
+This concludes this lesson on Hadoop MapReduce. Thank you for watching.
+Transcript name: Pig, Hive and Jaql overview
+English
+Welcome to the unit of Hadoop Fundamentals on Pig, Hive and Jaql.
+In this unit, we will examine three different technologies that make it easier to write
+MapReduce programs in Hadoop. We will begin with an overview of all three
+technologies,
+comparing and contrasting them with each other, then we will
+examine each technology in detail and see how to write MapReduce programs using
+them.
+Pig, Hive, and Jaql have much in common. They all translate high-level languages
+into MapReduce jobs so that the programmer can work at a higher level than he or
+she would when writing MapReduce jobs in Java or other lower-level languages
+supported by Hadoop using Hadoop streaming. The high level languages offered by
+Pig, Hive and Jaql let you write programs that are much smaller than the equivalent
+Java code. When you find that you need to work at a lower level to accomplish
+something these high-level languages do not support themselves, you have the
+option to extend these languages, often by writing user-defined functions in Java.
+Interoperability can work both ways since programs written in these high-level
+languages can be imbedded inside other languages as well. Finally, since all these
+technologies run on top of Hadoop, when they do so, they have the same limitations
+with respect to random reads and writes and low-latency queries as Hadoop does.
+Now, let us examine what is unique about each technology, starting with Pig. Pig
+was developed at Yahoo Research around 2006 and moved into the Apache
+Software Foundation in 2007. Pig's language, called PigLatin, is a data flow
+language - this is the kind of language in which you program by connecting things
+together. Pig can operate on complex data structures, even those that can have levels
+of nesting. Unlike SQL, Pig does not require that the data have a schema, so it is
+well suited to processing unstructured data. However, Pig can still leverage the value
+of a schema if you choose to supply one. Like SQL, PigLatin is relationally
+complete, which means it is at least as powerful as relational algebra. Turing
+completeness requires looping constructs, an infinite memory model, and
+conditional constructs. PigLatin is not Turing complete on its own, but is Turing
+complete when extended with User-Defined Functions.
+Hive is a technology developed at Facebook that turns Hadoop into a data
+warehouse complete with a dialect of SQL for querying. Being a SQL dialect,
+HiveQL is a declarative language. Unlike in PigLatin, you do not specify the data
+flow, but instead describe the result you want and Hive figures out how to build a
+data flow to achieve it. Also unlike Pig, a schema is required, but you are not limited
+to one schema. Like PigLatin and SQL, HiveQL on its own is a relationally
+complete language but not a Turing complete language. It can be extended through
+UDFs just like Pig to be Turing complete.
+The final technology is Jaql. Jaql was developed at IBM. It is a data flow language
+like PigLatin but its native data structure format is JavaScript Object Notation, or
+JSON. Schemas are optional and the Jaql language itself is Turing complete on its
+own without the need for extension through UDFs.
+This lesson is continued in the next video.
+Transcript name: Working with Pig
+English
+Let us examine Pig in detail. Pig consists of a language and an execution
+environment. The language is called PigLatin. There are two choices of execution
+environment: a local environment and distributed environment. A local environment
+is good for testing when you do not have a full distributed Hadoop environment
+deployed. You tell Pig to run in the local environment when you start Pig's
+command line interpreter by passing it the -x local option. You tell Pig to run in a
+distributed environment by passing -x mapreduce instead. Alternatively, you can
+start the Pig command line interpreter without any arguments and it will start it in
+the distributed environment.
+There are three different ways to run Pig. You can run your PigLatin code as a
+script, just by passing the name of your script file to the pig command. You can run
+it interactively through the grunt command line launched using pig with no script
+argument. Finally, you can call into Pig from within Java using Pig's embedded
+form.
+Now let us look into the details of the PigLatin language. A PigLatin progam is a
+collection of statements. A statement can either be an operation or a command. For
+example, to load data from a file, issue the LOAD operation with a file name as an
+argument. A command could be an HDFS command used directly within PigLatin
+such as the ls command to list, say, all files with an extension of txt in the current
+directory. The execution of a statement does not necessarily immediately result in a
+job running on the Hadoop cluster. All commands and certain operators, such as
+DUMP will start up a job, but other operations simply get added to a logical plan.
+This plan gets compiled to a physical plan and executed once a data flow has been
+fully constructed, such as when a DUMP or STORE statement is issued.
+Here are some of the kinds of statements in PigLatin. There are UDF statements that
+you can use to REGISTER a user-defined function into PigLatin and DEFINE a
+short form for referring to it. I mentioned that HDFS commands are a form of
+PigLatin statement. Other commands include MapReduce commands and Utility
+commands. There are also diagnostic operators such as DESCRIBE that works much
+like an SQL DESCRIBE to show you the schema of the data.
+The largest number of operators fall under the relational operators category. Here we
+have the operators to LOAD data into the program, to DUMP data to the screen, and
+to STORE data to disk. We also have operators for filtering, grouping, sorting,
+combining and splitting data.
+The relational operators produce relations as their output. A relation is a collection
+of tuples. Relations can be named using an alias. For example, the LOAD operator
+produces a relation based on what it reads from the file you pass it. You can assign
+this relation to an alias, say, x. If you DUMP the relation aliased by x by issuing
+"DUMP x", you get the collection of tuples, one for each row of input data. In this
+example, there is just the one tuple. When we ran LOAD on the file, we specified a
+schema with the AS argument. We can see this schema by running the DESCRIBE
+operator on the relation aliased by x.
+Statements that contain relational operators may also contain expressions. There are
+many different kinds of expressions. For example, a constant expression is simply a
+literal such as a number. A field expression lets you reference a field by its position.
+You specify it with a dollar sign and a number.
+PigLatin supports the standard set of simple data types like integers and character
+arrays. It also supports three complex types: the tuple as discussed previously, the
+bag, which is simply an unordered collection of tuples, and a map which is a set of
+key-value pairs with the requirement that the keys have a type of chararray.
+PigLatin also supports functions. These include eval functions, which take in
+multiple expressions and produce a single expression. For example, you can
+compute a maximum using the MAX function. A filter function takes in a bag or
+map and returns a boolean. For example, the isEmpty function can tell you if the bag
+or map is empty.
+A load function can be used with the LOAD operator to create a relation by reading
+from an input file. A store function does the reverse. It reads in a relation and writes
+it out to a file.
+You can write your own eval, filter, load, or store functions using PigLatin's UDF
+mechanism. You write the function in Java, package it into a jar, and register the jar
+using the REGISTER statement. You also have the option to give the function a
+shorter alias for referring to it by using the DEFINE statement.
+Let us now take a look at Apache Pig in action.
+First, we need to start Hadoop using the start.sh script.
+We will be using a data set on U.S. foreign aid available at data.gov.
+Let us examine the data in an Open Office spreadsheet first.
+We will import it as comma separated values.
+We see two columns: the country and the amount of foreign aid. Countries repeat
+because the spending program column has been removed.
+We need to copy this file into HDFS which we do with the hadoop fs -put command.
+We will keep the same name.
+Now let's launch the pig executable. It is not in the PATH, so we fully qualify it.
+This gives us the grunt prompt.
+We start by loading our data from the comma-separate value file, pass a comma to
+PigStorage, and apply a schema.
+Next we group by country, assigning the result to an alias called grouped.
+For each group, we want to generate a sum of the values in the sum column.
+We assign this to an alias called thesum.
+Then we DUMP thesum.
+This runs Hadoop and gives us our answer.
+This lesson is continued in the next video.
+Transcript name: Working with Hive
+English
+Let us examine Hive. As mentioned in the overview, Hive is a technology for
+turning Hadoop into a data warehouse, complete with an SQL dialect for querying it.
+We will begin our look at Hive with its configuration. You can configure Hive using
+any one of three methods. You can edit a file called hive-site.xml. You can use this
+file to specify the location of your HDFS NameNode and your MapReduce
+JobTracker. You can also use it for specifying configuration settings for the
+metastore, a topic we will
+come to later. These same options can be specified
+when starting the Hive command shell by specifying a -hiveconf option. Finally,
+within the Hive shell, you can change any of these settings using the set command.
+There are three ways to run Hive. You can run it interactively by launching the hive
+shell using the hive command with no arguments. You can run a Hive script by
+passing the -f option to the hive command along with the path to your script file.
+Finally, you can execute a Hive program as one command by passing the -e option
+to the hive command followed by your Hive program in quotes.
+Hive also supports launching services from the hive command. You can launch a
+service that lets you access Hive through Thrift, ODBC, or JDBC by passing --
+service to the hive command followed by the word hiveserver. There is also a web
+interface to hive whose service is launched by following the --service option with
+hwi. You can also use a Hive service to run the hadoop command with the jar option
+the same as you could do directly, but with Hive jars on the classpath. Lastly, there
+is a service for an out of process metastore.
+The metastore stores the Hive metadata. There are three configurations you can
+choose for your metastore. First is embedded, which runs the metastore code in the
+same process with your Hive program and the database that backs the metastore is in
+the same process as well. The second option is to run it as local, which keeps the
+metastore code running in process, but moves the database into a separate process
+that the metastore code communicates with. The third option is to move the
+metastore itself out of process as well. This can be useful if you wish to share a
+metastore with other users.
+One of the fundamental aspects of Hive's design is Schema-On-Read. In most SQL
+databases, the schema is applied when data is loaded into the database. In other
+words, most SQL databases are schema-on-write. Data coming in to the database
+must adhere to the schema. Hive's approach is to defer the application of a schema
+until you attempt to read the data. This has both benefits and drawbacks relative to
+schema-on-write. The benefits are that loads are faster and you have the flexibility
+of using multiple schemas for the same data. The downside is slower queries.
+Hive Query Language or HiveQL is an SQL dialect. It does not support the fully
+SQL92 specification modeling itself more on MySQL than SQL92. You can
+INSERT OVERWRITE TABLE but cannot UPDATE or DELETE. There are no
+transactions and no indexes. There is no support for the HAVING clause in a
+SELECT statement, nor for correlated subqueries, subqueries outside FROM
+clauses, updateable or materialized views or stored procedures.
+HiveQL has many of the same extensions over SQL92 as MySQL does. It also has
+extensions designed to address the MapReduce features available in Hadoop such as
+a MAP clause and a REDUCE clause. Like Pig, Hive has both simple types like INT
+and STRING and complex types ARRAY, MAP and STRUCT.
+Hive has many built-in functions though not as many as SQL. You can view them
+by typing SHOW FUNCTIONS from the Hive shell. You can find information on an
+individual function by typing DESCRIBE FUNCTION followed by the function's
+name in the Hive shell.
+Like other SQL databases, Hive works in terms of tables. There are two kinds of
+tables you can create: managed tables whose data is managed by Hive and external
+tables whose data is managed outside of Hive. When you load a file into a managed
+table, Hive moves the file into its data warehouse. When you drop such a table, both
+the data and metadata are deleted. When you load a file into an external table, no
+files are moved. Dropping the table only deletes the metadata. The data is left alone.
+External tables are useful for sharing data between Hive and other Hadoop
+applications or when you wish to use more than one schema on the same data.
+Hive offers a way to speed up queries of subsets of your data. You can partition your
+data based on the value of a column. When creating a table, you can specify a
+PARTITION BY clause to specify the column used to partition the data. Then, when
+loading the data, you specify a PARTITION clause to say what partition you are
+loading. You can then query individual partitions more efficiently than you could
+unpartitioned data. The SHOW PARTITIONS command will let you see a table's
+partitions.
+Another option Hive provides for speeding up queries is bucketing. Like
+partitioning, bucketing splits up the data by a particular column, but in bucketing
+you do not specify the individual values for that column that correspond to buckets,
+you simply say how many buckets to split the table into and let Hive figure out how
+to do it. The benefit of bucketing is that imposes extra structure on your table that
+can be used to speed up certain queries, such as joins on bucketed columns. It also
+improves performance when sampling your data. You specify the column to bucket
+on and the number of buckets using the CLUSTERED BY clause. If you wanted the
+bucket to be sorted as well, you use the SORTED BY clause. If you wish to query a
+sample of your data rather than the whole data set, you can use the TABLESAMPLE
+command and it will take advantage of bucketing.
+Hive has multiple ways of reading and storing your data on disk. There is a
+delimited text format and two binary formats. A serializer/deserializer or SerDe is
+used for translating to and from the storage format. Among the binary SerDes are a
+SerDe for dealing with row-oriented binary data in a SequenceFile and one for
+dealing with column oriented binary data in an RCFile.
+Like PigLatin, HiveQL lets you extend it by writing user-defined functions in Java,
+registering them into HiveQL, and optionally aliasing them to shorter names. There
+are three types of HiveQL UDFs: an ordinary UDF that whose input and output are
+both a single row, an aggregate UDF or UDAF that transforms multiple rows into a
+single row, and a table UDF or UDTF that transforms a single row into multiple
+rows. You register the jar file containing your UDF with the ADD JAR command
+and alias it with the CREATE TEMPORARY FUNCTION command.
+Now let us take a look at Hive in action.
+BigInsights is configured to use a metastore separate from the hive shell so we start
+the metastore service using the start.sh script. The web service gets started as well.
+As in the Pig demonstration, we will use the U.S. foreign aid dataset.
+Let us start the hive shell with the hive command.
+First, we create a table to store the foreign aid data.
+We give it a schema by specifying country for the first column and sum for the
+second.
+The file is comma delimited, so we specify the row format as delimited and we state
+that fields are terminated by a comma.
+The data is stored on disk as a textfile.
+We now see our table when we run SHOW TABLES
+We can see its schema using DESCRIBE.
+Let us load data from HDFS into our newly created table
+Now if we write a SELECT statement with a LIMIT we quickly get back a picture
+of some of our data.
+Now let us compute the sum for each country as we did in Pig. We simply use the
+standard SQL GROUP BY clause.
+Maps and reduces are run and here is the result.
+This lesson is continued in the next video.
+Transcript name: Working with Jaql
+English
+Jaql is a JSON-based query language that, like PigLatin and HiveQL, translates into
+Hadoop MapReduce jobs. JSON is the data interchange standard that is human-
+readable like XML but is designed to be lighter-weight. You run Jaql programs
+using the Jaql shell. You start the Jaql shell using the jaqlshell command. If you pass
+it no arguments, you start it in interactive mode. If you pass the -b argument and
+the path to a file, you will execute the contents of that file as a Jaql script.
+Finally, if you pass the -e argument, the Jaql shell will execute the Jaql statement
+that follows the -e. There are two modes that the Jaql shell can run in: The first is
+cluster mode, specified with a -c argument. It uses your Hadoop cluster if you have
+one configured. The other option is minicluster mode, which starts a minicluster that
+is useful for quick tests.
+The Jaql query language is a data-flow language. You describe flows of data by
+setting up sources and sinks and specifying how they connect to each other. For
+example, a read from, say, a local file is a source and a write to, say, HDFS is a sink.
+Along the way from the source to the sink, you can have the data pass through
+various filters, grouping functions, sorting functions, and transformation functions.
+These are called operators and there are nine different kinds.
+You can bind a source to a variable using the equals sign operator. You can then
+refer to that source by its variable name throughout your program. The way you
+connect the flows of data to consumers of that data is through the pipe operator,
+which is a minus sign followed by a greater than symbol. This operator expects an
+array as its input. For example, say we have a twitter feed stored in a file in HDFS
+and we turn it into a source and bind that source to the variable $tweets. We can
+supply $tweets as the array input to the pipe operator and use a filter operator to
+filter out tweets that did not come from tweetdeck. We can refer to each element in
+the array with the $ implicit variable and then access its individual members such as
+from_src using a dot after the $.
+The Jaql language has numerous built-in functions. There are 18 categories of such
+functions with many functions in each category.
+Jaql supports many different data stores including obvious ones like HDFS and the
+local filesystem but also DB2 and JDBC. The data formats are not limited to JSON.
+You can also interact with data in CSV (or comma separated values) or XML
+formats.
+Now let us take a look at Jaql in action.
+We start Jaql's shell by running the jaqlshell command from the jaql/bin directory
+under biginsights. We give it the -c option to tell it to run on the hadoop cluster.
+Again, we will use the foreign aid data set.
+We will start by reading from the text file using del because the file is in comma
+separated value format.
+We assign this source to the variable $foreignaid.
+We want to assign a schema so we can refer to the country and sum fields easily and
+ensure sum is treated as a long rather than an int.
+Next, we pipe the data from $foreignaid source to a consumer called group by and it
+groups the data by country because we specify the country field of the $ implicit
+variable as the argument to "group by".
+We use "into" to say we want a result with a country field and a field containing the
+sum of all the values in the sum field for that country.
+This produces a result that is in JSON format.
+This concludes this lesson on Pig, Hive, and Jaql. Thank you for watching.
+Transcript name: Flume – Part 1
+English
+Welcome to the unit of Hadoop Fundamentals on Flume.
+We will begin by looking at Flume's architecture, then examine the three modes it
+can run in followed by a look at the event data model.
+Flume is an open source software program developed by Cloudera that acts as a
+service for aggregating and moving large amounts of data around a Hadoop cluster
+as the data is produced or shortly thereafter. Its primary use case is the gathering of
+log files from all the machines in a cluster to persist them in a centralized store such
+as HDFS.
+In Flume, you create data flows by building up chains of logical nodes and
+connecting them to sources and sinks. For example, say you wish to move data from
+an Apache access log into HDFS. You create a source by tailing access.log and use a
+logical node to route this to an HDFS sink.
+Most production Flume deployments have a three tier design. The agent tier consists
+of Flume agents colocated with the source of the data that is to be moved. The
+collector tier consists of perhaps multiple collectors each of which collects data
+coming in from multiple agents and forwards it on to the storage tier which may
+consist of a file system such as HDFS.
+Here is an example of such a design. Say we have four http server nodes producing
+log files labelled httpd_logx where x is a number between 1 and 4. Each of these
+http server nodes has a Flume agent process running on it. There are two collector
+nodes. Collector1 is configured to take data from Agent1 and Agent2 and route it to
+HDFS. Collector2 is configured to take data from Agent3 and Agent4 and route it to
+HDFS. Having multiple collector processes allows one to increase the parallelism in
+which data flows into HDFS from the web servers.
+Controlling all of these agent and collector processes is a process called the master.
+The master is capable of reconfiguring routes on the fly to, say, decommission a
+collector node that is performing poorly and commission a new one. The master can
+communicate with any and all nodes.
+Flume was designed with four criteria in mind: reliability, scalability, manageability,
+and extensibility. We will examine each of these criteria in turn.
+Because there is tradeoff between reliability and performance, Flume supports
+multiple levels of reliability to suite the user's needs. End-to-end reliability
+guarantees that any event, such as an update to a log file, that is accepted into Flume
+makes it to the endpoint, such as the HDFS. "Store on failure" reliability guarantees
+that an accepted event makes it to the next node in the chain, but doesn't guarantee
+reaching the endpoint. "Best effort" reliability makes no guarantees but has the least
+overhead. These reliability levels can be specified for each individual flow.
+Flume's three tier architecture helps it to achieve a high level of scalability. Ihe
+individual layers within that architecture are also designed with scalability in mind.
+The collector tier lets you have multiple collectors to parallelize the workload and
+Flume can randomly assign flows to connectors to balance the workload among
+them. Flume also buffers data so that the storage tier avoids spikes from high-
+volume bursts of data. Using a scalable storage system like HDFS also wins you
+scalability at the storage layer. Even Flume's control mechanism is designed to scale
+through the use of multiple masters replicating their state.
+In large distributed systems like the kinds you can build with Flume, centralized
+management and monitoring is critical. Flume can automatically make configuration
+changes in response to changes in the underlying system. For example, Flume can
+handle imbalances in the workload, failures of individual nodes, and Flume can
+automatically reconfigure itself to take advantage of newly provisioned hardware.
+You can build node topologies in Flume of arbitrary shape, size and complexity -
+whatever suits your particular data movement needs. Flume provides a data flow
+specification language that lets you easily build up these topologies.
+Finally, Flume is extensible. You can add new sources as source extensions, add
+new kinds of sinks using sink extensions, and even apply processing to data as
+moves through a flow through the use of decorators, which can also be extended.
+This lesson is continued in the next video.Transcript name: Flume – Part 2
+English
+Much like Hadoop, Flume supports three modes of operation: single node, pseudo-
+distributed, and fully distributed. Single node is useful for basic testing and getting
+up and running quickly, pseudo-distributed is a more production like environment
+that lets you build more complicated flows while testing on a single physical
+machine, and fully distributed is the mode you run in for production. The fully-
+distributed mode offers two further sub-modes: a standalone mode with a single
+master and a distributed mode with multiple masters.
+Let us start by examining the single node mode. The dump command gives you a
+source and sink all in one command. You run the flume command and specify the
+word "dump" and an argument. The console argument echos stdin to stdout. The text
+argument lets you dump the contents of a text file to stdout. Tail is much like the
+unix tail command, streaming data out as it arrives. Multitail is simply a version of
+tail that reads from multiple files at once. There are many other sources. All of these
+sources are the same as you would use in the pseudo-distributed and fully distributed
+modes.
+Pseudo-distributed mode runs like a real production Flume environment, except on a
+single machine. You use it by starting up a master daemon and at least one node
+daemon, both of which can be configured through an http interface.
+Here we have the web interface for a Flume master node.
+You configure it by clicking the config link at the top.
+This takes you to a "Flume Master: Configure Nodes" page.
+To configure a node, you choose the node from the dropdown list.
+You specify a source and a sink for the node. In this case, we will simply configure
+it like the "flume dump console" command and make both the source and sink a
+console.
+There are many other event sinks than consoles. There is the null sink for simply
+discarding events, the text sink for writing to a text file, and a dfs sink for writing to
+a distributed file system such as HDFS. One limitation with writing directly from
+source to a dfs sink is that there is no durability guarantee until the file is closed.
+There is a way to compensate for this, but it involves introducing a collector tier into
+our configuration.
+So this time, we start a master and two nodes: one node to serve as a collector and
+another to serve as an agent. Using the -n option, we can give them names when we
+start them. Now we simply have to connect them to each other, connect the agent to
+the source, and connect the collector to the sink. You see the number to use to
+identify the collector when you start it. In this case it is 35853.
+You specify this configuration on the same page as before, but under the "Configure
+multiple nodes" heading.
+Finally, fully-distributed mode can be configured by editing the flume-site.xml file
+in flume's conf directory. You specify the names of the machines you want to use as
+master servers. You have the option to specify more than one.
+Data flows through Flume in the form of events. Events have two parts: the body
+and the metadata. The body is just a string of bytes containing the content of the
+event. The size limit is under your control, but defaults to 32 kilobytes. The
+metadata is in the form of a table of key/value pairs. Flume can inspect the metadata
+to make routing decisions. Some examples of metadata include the time of
+creation of the event and the machine that created the event.
+This concludes this lesson. Thank you for watching.
+
+
